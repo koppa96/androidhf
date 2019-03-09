@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:fitsSystemWindows="true">
-
-    <ImageView
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/login_background_blurry"
-        android:scaleType="centerCrop"/>
+        tools:context=".LoginActivity"
+        android:fitsSystemWindows="true">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/login_background_blurry"
+            android:scaleType="centerCrop"/>
+
+    <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_message_pink_200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginTop="50dp" app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+            android:text="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvAppName" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/icon"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp" android:textStyle="bold"
+            android:textAllCaps="false" android:textSize="24sp"/>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/loginViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" tools:layout_editor_absoluteY="74dp" tools:layout_editor_absoluteX="52dp"/>
+            android:id="@+id/loginViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:layout_editor_absoluteX="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName" android:layout_marginTop="32dp"/>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
