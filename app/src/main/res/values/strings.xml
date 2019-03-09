@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidChatter</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="swipe_left_to_register">Swipe left to register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="register">Register</string>
+    <string name="swipe_right_to_sign_in">Swipe right to sign in.</string>
+</resources>
