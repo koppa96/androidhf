@@ -1,5 +1,6 @@
 package hu.aut.bme.androidchatter
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
@@ -13,6 +14,5 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         loginViewPager.adapter = LoginViewPagerAdapter(supportFragmentManager)
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 }
