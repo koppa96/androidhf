@@ -9,4 +9,8 @@
     <string name="e_mail">E-mail</string>
     <string name="register">Regisztráció</string>
     <string name="swipe_right_to_sign_in">Húzd jobbra a bejelentkezéshez.</string>
+    <string name="passwords_not_matching">Nem egyeznek a jelszavak</string>
+    <string name="failed_to_create_user">Sikertelen regisztráció</string>
+    <string name="settings">Beállítások</string>
+    <string name="sign_out">Kijelentkezés</string>
 </resources>
