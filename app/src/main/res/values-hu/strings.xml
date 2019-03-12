@@ -13,4 +13,5 @@
     <string name="failed_to_create_user">Sikertelen regisztráció</string>
     <string name="settings">Beállítások</string>
     <string name="sign_out">Kijelentkezés</string>
+    <string name="field_must_be_filled">Ezt a mezőt kötelező kitölteni!</string>
 </resources>

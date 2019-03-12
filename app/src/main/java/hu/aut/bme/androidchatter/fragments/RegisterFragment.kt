@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -34,6 +35,10 @@ class RegisterFragment : Fragment() {
             val password = etPassword.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
 
+            if (!formFilled()) {
+                return@setOnClickListener
+            }
+
             if (password != confirmPassword) {
                 etPassword.text.clear()
                 etConfirmPassword.text.clear()
@@ -43,8 +48,39 @@ class RegisterFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
+            btnRegister.startAnimation(scaleDown)
+            btnRegister.isEnabled = false
+            registerLoading.visibility = View.VISIBLE
+
             register(username, email, password)
         }
+    }
+
+    private fun formFilled() : Boolean {
+        var correct = true
+
+        if (etUsername.text.isBlank()) {
+            etUsername.error = getString(R.string.field_must_be_filled)
+            correct = false
+        }
+
+        if (etEmail.text.isBlank()) {
+            etEmail.error = getString(R.string.field_must_be_filled)
+            correct = false
+        }
+
+        if (etPassword.text.isBlank()) {
+            etPassword.error = getString(R.string.field_must_be_filled)
+            correct = false
+        }
+
+        if (etConfirmPassword.text.isBlank()) {
+            etConfirmPassword.error = getString(R.string.field_must_be_filled)
+            correct = false
+        }
+
+        return correct
     }
 
     private fun register(username: String, email: String, password: String) {
@@ -63,6 +99,12 @@ class RegisterFragment : Fragment() {
                     activity?.finish()
                 } else {
                     Toast.makeText(activity, getString(R.string.failed_to_create_user), Toast.LENGTH_SHORT).show()
+
+                    registerLoading.visibility = View.GONE
+
+                    val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
+                    btnRegister.startAnimation(scaleUp)
+                    btnRegister.isEnabled = true
                 }
             }
     }
