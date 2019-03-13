@@ -6,4 +6,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorPrimaryAlpha">#aad81b60</color>
     <color name="colorPrimaryDarkAlpha">#b5a00037</color>
+    <color name="colorDarkerBackgroundAlpha">#80000000</color>
+    <color name="colorDarkBackgroundAlpha">#50000000</color>
+    <color name="colorUncheckedMenuItem">#AAAAAA</color>
+    <color name="colorCheckedMenuItem">#EEEEEE</color>
 </resources>

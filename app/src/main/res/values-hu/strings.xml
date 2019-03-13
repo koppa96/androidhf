@@ -14,4 +14,12 @@
     <string name="settings">Beállítások</string>
     <string name="sign_out">Kijelentkezés</string>
     <string name="field_must_be_filled">Ezt a mezőt kötelező kitölteni!</string>
+    <string name="requests">Felkérések</string>
+    <string name="chats">Beszélgetések</string>
+    <string name="search">Keresés</string>
+    <string name="change_password">Jelszó megváltoztatása</string>
+    <string name="current_password">Jelenlegi jelszó</string>
+    <string name="new_password">Új jelszó</string>
+    <string name="change_e_mail_address">E-mail cím változtatás</string>
+    <string name="change_username">Felhasználónév megváltoztatása</string>
 </resources>
