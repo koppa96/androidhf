@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import hu.aut.bme.androidchatter.MainActivity
 import hu.aut.bme.androidchatter.R
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -87,16 +88,18 @@ class RegisterFragment : Fragment() {
         val mAuth = FirebaseAuth.getInstance()
 
         mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener() {
+            .addOnCompleteListener {
                 if(it.isSuccessful) {
-                    val profileUpdate = UserProfileChangeRequest.Builder()
-                                            .setDisplayName(username)
-                                            .build()
-                    mAuth.currentUser?.updateProfile(profileUpdate)
+                    val uid = mAuth.currentUser!!.uid
 
-                    val intent = Intent(activity, MainActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()
+                    val dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(uid)
+                    dbRef.setValue(username).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val intent = Intent(activity, MainActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        }
+                    }
                 } else {
                     Toast.makeText(activity, getString(R.string.failed_to_create_user), Toast.LENGTH_SHORT).show()
 
