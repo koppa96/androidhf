@@ -19,7 +19,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
     
-    <style name="SettingsCardViewStyle" parent="CardView">
+    <style name="CardViewStyle" parent="CardView">
         <item name="cardElevation">0dp</item>
         <item name="cardBackgroundColor">@color/colorDarkBackgroundAlpha</item>
         <item name="cardCornerRadius">5dp</item>

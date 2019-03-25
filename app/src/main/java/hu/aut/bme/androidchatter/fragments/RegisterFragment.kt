@@ -13,9 +13,12 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.MainActivity
 import hu.aut.bme.androidchatter.R
+import hu.aut.bme.androidchatter.models.User
 import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.item_search.*
 
 class RegisterFragment : Fragment() {
 
@@ -49,10 +52,7 @@ class RegisterFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
-            btnRegister.startAnimation(scaleDown)
-            btnRegister.isEnabled = false
-            registerLoading.visibility = View.VISIBLE
+            startLoadingAnimation()
 
             register(username, email, password)
         }
@@ -84,31 +84,59 @@ class RegisterFragment : Fragment() {
         return correct
     }
 
+    private fun startLoadingAnimation() {
+        val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
+        btnRegister.startAnimation(scaleDown)
+        btnRegister.isEnabled = false
+        registerLoading.visibility = View.VISIBLE
+    }
+
+    private fun stopLoadingAnimation() {
+        registerLoading.visibility = View.GONE
+
+        val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
+        btnRegister.startAnimation(scaleUp)
+        btnRegister.isEnabled = true
+    }
+
     private fun register(username: String, email: String, password: String) {
-        val mAuth = FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+        db.collection("Users").whereEqualTo("name", username).get().addOnCompleteListener {
+            if (it.isSuccessful) {
+                it.result?.let {
+                    if (!it.isEmpty) {
+                        etUsername.error = "Username already taken!"
+                        stopLoadingAnimation()
+                        return@addOnCompleteListener
+                    }
+                }
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if(it.isSuccessful) {
-                    val uid = mAuth.currentUser!!.uid
+                val mAuth = FirebaseAuth.getInstance()
+                mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if(it.isSuccessful) {
+                            val uid = mAuth.currentUser!!.uid
 
-                    val dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(uid)
-                    dbRef.setValue(username).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val intent = Intent(activity, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            val userData = HashMap<String, Any>()
+                            userData["name"] = username
+
+                            db.collection("Users").document(uid).set(userData).addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    val intent = Intent(activity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    activity?.finish()
+                                } else {
+                                    Toast.makeText(activity, "Failed to create user record in database.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } else {
+                            Toast.makeText(activity, getString(R.string.failed_to_create_user), Toast.LENGTH_SHORT).show()
+                            stopLoadingAnimation()
                         }
                     }
-                } else {
-                    Toast.makeText(activity, getString(R.string.failed_to_create_user), Toast.LENGTH_SHORT).show()
-
-                    registerLoading.visibility = View.GONE
-
-                    val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
-                    btnRegister.startAnimation(scaleUp)
-                    btnRegister.isEnabled = true
-                }
+            } else {
+                Toast.makeText(activity, "Couldn't fetch the users list.", Toast.LENGTH_SHORT).show()
             }
+        }
     }
 }

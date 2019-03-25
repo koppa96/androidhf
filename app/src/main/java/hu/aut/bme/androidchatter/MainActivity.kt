@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
+
         setSupportActionBar(toolbar)
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
 
