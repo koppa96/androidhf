@@ -1,7 +1,9 @@
 package hu.aut.bme.androidchatter.fragments
 
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,58 +14,50 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import hu.aut.bme.androidchatter.MainActivity
 import hu.aut.bme.androidchatter.R
+import hu.aut.bme.androidchatter.databinding.FragmentLoginBinding
+import hu.aut.bme.androidchatter.interfaces.LoginView
+import hu.aut.bme.androidchatter.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginView {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        val binding = DataBindingUtil.inflate<FragmentLoginBinding>(inflater, R.layout.fragment_login, container, false)
+        binding.viewModel = LoginViewModel(this)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onSuccessfulLogin() {
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
+    }
 
-        btnLogin.setOnClickListener {
-            val mAuth = FirebaseAuth.getInstance()
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
-            var error : Boolean = false;
+    override fun showLoginError() {
+        Toast.makeText(context, "Wrong e-mail or password!", Toast.LENGTH_SHORT).show()
+    }
 
-            if (email.isBlank()) {
-                etEmail.error = getString(R.string.field_must_be_filled)
-                error = true
-            }
+    override fun setEmailError() {
+        etEmail.error = getString(R.string.field_must_be_filled)
+    }
 
-            if (password.isBlank()) {
-                etPassword.error = getString(R.string.field_must_be_filled)
-                error = true
-            }
+    override fun setPasswordError() {
+        etPassword.error = getString(R.string.field_must_be_filled)
+    }
 
-            if (error) {
-                return@setOnClickListener
-            }
+    override fun startLoadingAnimation() {
+        val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
+        btnLogin.startAnimation(scaleDown)
+        btnLogin.isEnabled = false
 
-            val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
-            btnLogin.startAnimation(scaleDown)
-            btnLogin.isEnabled = false
+        loginLoading.visibility = View.VISIBLE
+    }
 
-            loginLoading.visibility = View.VISIBLE
+    override fun stopLoadingAnimation() {
+        loginLoading.visibility = View.GONE
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val intent = Intent(activity, MainActivity::class.java)
-                        startActivity(intent)
-                        activity?.finish()
-                    } else {
-                        Toast.makeText(activity, "Login unsuccessful", Toast.LENGTH_SHORT).show()
-
-                        loginLoading.visibility = View.GONE
-
-                        val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
-                        btnLogin.startAnimation(scaleUp)
-                        btnLogin.isEnabled = true
-                    }
-            }
-        }
+        val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
+        btnLogin.startAnimation(scaleUp)
+        btnLogin.isEnabled = true
     }
 }

@@ -21,4 +21,5 @@
     <string name="new_password">New password</string>
     <string name="change_e_mail_address">Change E-mail address</string>
     <string name="change_username">Change username</string>
+	<string name="username_taken">Username already taken!</string>
 </resources>

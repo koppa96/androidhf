@@ -22,4 +22,5 @@
     <string name="new_password">Új jelszó</string>
     <string name="change_e_mail_address">E-mail cím változtatás</string>
     <string name="change_username">Felhasználónév megváltoztatása</string>
+	<string name="username_taken">A felhasználónév foglalt</string>
 </resources>
