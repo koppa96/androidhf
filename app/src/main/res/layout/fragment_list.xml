@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="match_parent"
-	android:id="@+id/recyclerView"
-	android:paddingStart="5dp"
-	android:paddingEnd="5dp"/>
+	android:layout_width="match_parent">
+	
+	<hu.aut.bme.androidchatter.view.EmptyRecyclerView
+		android:id="@+id/recyclerView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+	
+	<TextView
+		android:id="@+id/tvEmptyList"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_centerHorizontal="true"/>
+	
+</RelativeLayout>

@@ -3,6 +3,7 @@ package hu.aut.bme.androidchatter.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +30,9 @@ class SentRequestsListFragment : Fragment(), SentRequestAdapter.SentRequestActio
         val auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()
 
-        val query = db.collection("Requests")
-            .whereEqualTo("senderId", auth.currentUser!!.uid)
-            .orderBy("receiverName")
+        val query = db.collection(Request.COLLECTION_NAME)
+            .whereEqualTo(Request.SENDER_ID, auth.currentUser!!.uid)
+            .orderBy(Request.RECEIVER_NAME)
 
         val options = FirestoreRecyclerOptions.Builder<Request>()
             .setQuery(query, Request::class.java)
@@ -40,14 +41,16 @@ class SentRequestsListFragment : Fragment(), SentRequestAdapter.SentRequestActio
         adapter = SentRequestAdapter(options)
         adapter.sentRequestActionListener = this
 
+        recyclerView.emptyView = tvEmptyList
+        recyclerView.emptyMessage = getString(R.string.no_requests_sent)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onCanceled(request: Request) {
         val db = FirebaseFirestore.getInstance()
-        db.collection("Requests").document(request.requestId!!).delete().addOnSuccessListener {
-            Toast.makeText(context, "Request canceled", Toast.LENGTH_SHORT).show()
+        db.collection(Request.COLLECTION_NAME).document(request.requestId!!).delete().addOnSuccessListener {
+            Toast.makeText(context, getString(R.string.request_canceled), Toast.LENGTH_SHORT).show()
         }
     }
 

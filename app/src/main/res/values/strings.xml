@@ -29,4 +29,13 @@
     <string name="self_request_error">You can not send a request to yourself.</string>
     <string name="request_sent">Request sent</string>
     <string name="failed_to_send_request">Failed to send request</string>
+	<string name="no_requests_sent">There are no pending requests sent by you.</string>
+    <string name="request_canceled">Request canceled</string>
+    <string name="no_users">There are no users to display.</string>
+    <string name="already_sent_request">You\'ve already sent a request to %1$s</string>
+    <string name="already_received_request">%1$s has already sent you a request</string>
+	<string name="name_change_successful">Username changed successfully</string>
+    <string name="no_incoming_requests">You have no incoming requests.</string>
+    <string name="request_accepted">Request accepted</string>
+    <string name="request_rejected">Request rejected</string>
 </resources>

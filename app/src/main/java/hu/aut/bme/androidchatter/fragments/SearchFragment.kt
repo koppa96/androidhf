@@ -33,7 +33,7 @@ class SearchFragment : Fragment(), UserAdapter.UserClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection("Users").orderBy("name")
+        val query = db.collection(User.COLLECTION_NAME).orderBy(User.NAME)
         val options = FirestoreRecyclerOptions.Builder<User>()
             .setQuery(query, User::class.java)
             .build()
@@ -42,8 +42,12 @@ class SearchFragment : Fragment(), UserAdapter.UserClickListener {
         userAdapter.userClickListener = this
         adapter = userAdapter
 
+        recyclerView.emptyView = tvEmptyList
+        recyclerView.emptyMessage = getString(R.string.no_users)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
+
+
     }
 
     override fun onStart() {
@@ -64,27 +68,27 @@ class SearchFragment : Fragment(), UserAdapter.UserClickListener {
             return
         }
 
-        db.collection("Requests")
-            .whereEqualTo("senderId", currentUser.uid)
-            .whereEqualTo("receiverId", user.uid)
+        db.collection(Request.COLLECTION_NAME)
+            .whereEqualTo(Request.SENDER_ID, currentUser.uid)
+            .whereEqualTo(Request.RECEIVER_ID, user.uid)
             .get()
             .addOnSuccessListener {
                 it?.let {
                     if (!it.isEmpty) {
-                        Toast.makeText(context, "You've already sent a request to ${user.name}", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, getString(R.string.already_sent_request, user.name), Toast.LENGTH_SHORT)
                             .show()
                         return@addOnSuccessListener
                     }
                 }
 
-                db.collection("Requests")
-                    .whereEqualTo("senderId", user.uid)
-                    .whereEqualTo("receiverId", currentUser.uid)
+                db.collection(Request.COLLECTION_NAME)
+                    .whereEqualTo(Request.SENDER_ID, user.uid)
+                    .whereEqualTo(Request.RECEIVER_ID, currentUser.uid)
                     .get()
                     .addOnSuccessListener {
                         it?.let {
                             if (!it.isEmpty) {
-                                Toast.makeText(context, "${user.name} has already sent you a request", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, getString(R.string.already_received_request, user.name), Toast.LENGTH_SHORT).show()
                                 return@addOnSuccessListener
                             }
                         }
@@ -109,14 +113,14 @@ class SearchFragment : Fragment(), UserAdapter.UserClickListener {
         val currentUser = FirebaseAuth.getInstance().currentUser!!
 
         val request = Request(
-            requestId = db.collection("Requests").document().id,
+            requestId = db.collection(Request.COLLECTION_NAME).document().id,
             senderId = currentUser.uid,
             senderName = currentUser.displayName,
             receiverId = user.uid,
             receiverName = user.name
         )
 
-        db.collection("Requests").document(request.requestId!!).set(request).addOnCompleteListener {
+        db.collection(Request.COLLECTION_NAME).document(request.requestId!!).set(request).addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, getString(R.string.request_sent), Toast.LENGTH_SHORT).show()
             } else {

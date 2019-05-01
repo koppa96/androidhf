@@ -3,6 +3,7 @@ package hu.aut.bme.androidchatter.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +29,9 @@ class ReceivedRequestsListFragment : Fragment(), ReceivedRequestAdapter.Received
         val auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()
 
-        val query = db.collection("Requests")
-            .whereEqualTo("receiverId", auth.currentUser!!.uid)
-            .orderBy("senderName")
+        val query = db.collection(Request.COLLECTION_NAME)
+            .whereEqualTo(Request.RECEIVER_ID, auth.currentUser!!.uid)
+            .orderBy(Request.SENDER_NAME)
 
         val options = FirestoreRecyclerOptions.Builder<Request>()
             .setQuery(query, Request::class.java)
@@ -39,18 +40,20 @@ class ReceivedRequestsListFragment : Fragment(), ReceivedRequestAdapter.Received
         adapter = ReceivedRequestAdapter(options)
         adapter.receivedRequestActionListener = this
 
+        recyclerView.emptyView = tvEmptyList
+        recyclerView.emptyMessage = getString(R.string.no_incoming_requests)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onRequestAccepted(request: Request) {
-        Toast.makeText(context, "Request accepted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.request_accepted), Toast.LENGTH_SHORT).show()
     }
 
     override fun onRequestRejected(request: Request) {
         val db = FirebaseFirestore.getInstance()
-        db.collection("Requests").document(request.requestId!!).delete().addOnSuccessListener {
-            Toast.makeText(context, "Request rejected", Toast.LENGTH_SHORT).show()
+        db.collection(Request.COLLECTION_NAME).document(request.requestId!!).delete().addOnSuccessListener {
+            Toast.makeText(context, getString(R.string.request_rejected), Toast.LENGTH_SHORT).show()
         }
     }
 

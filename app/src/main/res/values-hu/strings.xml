@@ -30,4 +30,13 @@
     <string name="self_request_error">Nem küldhetsz magadnak felkérést</string>
     <string name="request_sent">Felkérés elküldve</string>
     <string name="failed_to_send_request">Sikertelen felkérés</string>
+	<string name="no_requests_sent">Nincs függőben lévő kimenő felkérésed.</string>
+    <string name="request_canceled">Felkérés visszavonva</string>
+    <string name="no_users">Nincs megjeleníthető felhasználó.</string>
+    <string name="already_sent_request">Már küldtél felkérést %1$s számára</string>
+    <string name="already_received_request">%1$s már küldött neked egy felkérést</string>
+    <string name="name_change_successful">Sikeresen megváltoztattad a felhasználóneved</string>
+    <string name="no_incoming_requests">Nincs bejövő felkérésed</string>
+    <string name="request_accepted">Felkérés elfogadva</string>
+    <string name="request_rejected">Felkérés elutasítva</string>
 </resources>

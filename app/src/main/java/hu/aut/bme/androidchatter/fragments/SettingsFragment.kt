@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import hu.aut.bme.androidchatter.R
+import hu.aut.bme.androidchatter.models.User
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
@@ -24,13 +25,13 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnChangeUsername.setOnClickListener {
-            val dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(user.uid)
+            val dbRef = FirebaseDatabase.getInstance().reference.child(User.COLLECTION_NAME).child(user.uid)
             val newUsername = etNewUsername.text.toString()
 
             if (newUsername.isNotBlank()) {
                 dbRef.setValue(newUsername).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(activity, "Username changed successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, getString(R.string.name_change_successful), Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
