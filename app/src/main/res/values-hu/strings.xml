@@ -23,4 +23,11 @@
     <string name="change_e_mail_address">E-mail cím változtatás</string>
     <string name="change_username">Felhasználónév megváltoztatása</string>
 	<string name="username_taken">A felhasználónév foglalt</string>
+	<string name="confirm_action">Megerősítés</string>
+    <string name="confirm_request_send_text">Biztosan szeretnél felkérést küldeni %1$s számára?</string>
+    <string name="no">Nem</string>
+    <string name="yes">Igen</string>
+    <string name="self_request_error">Nem küldhetsz magadnak felkérést</string>
+    <string name="request_sent">Felkérés elküldve</string>
+    <string name="failed_to_send_request">Sikertelen felkérés</string>
 </resources>

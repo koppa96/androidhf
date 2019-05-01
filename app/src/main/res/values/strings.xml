@@ -22,4 +22,11 @@
     <string name="change_e_mail_address">Change E-mail address</string>
     <string name="change_username">Change username</string>
 	<string name="username_taken">Username already taken!</string>
+	<string name="confirm_action">Confirm your action</string>
+    <string name="confirm_request_send_text">Are your sure you want to send a request to %1$s?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="self_request_error">You can not send a request to yourself.</string>
+    <string name="request_sent">Request sent</string>
+    <string name="failed_to_send_request">Failed to send request</string>
 </resources>

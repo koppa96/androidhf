@@ -8,10 +8,7 @@ import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.google.firebase.auth.FirebaseAuth
-import hu.aut.bme.androidchatter.fragments.ChatsFragment
-import hu.aut.bme.androidchatter.fragments.RequestsFragment
-import hu.aut.bme.androidchatter.fragments.SearchFragment
-import hu.aut.bme.androidchatter.fragments.SettingsFragment
+import hu.aut.bme.androidchatter.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

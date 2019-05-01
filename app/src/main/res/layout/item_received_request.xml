@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	style="@style/CardViewStyle"
+	android:layout_height="wrap_content">
+	
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		
+		<ImageView
+			android:id="@+id/ivProfile"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_person_black_35dp"
+			android:layout_alignParentStart="true"
+			android:layout_centerVertical="true"/>
+		
+		<TextView
+			android:id="@+id/tvSenderName"
+			android:text="@string/username"
+			android:textSize="18sp"
+			android:layout_marginStart="8dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toEndOf="@id/ivProfile"
+			android:layout_centerVertical="true"/>
+		
+		<ImageButton
+			android:id="@+id/ibReject"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_clear_white_24dp"
+			android:backgroundTint="@android:color/transparent"
+			android:layout_toStartOf="@id/ibAccept"
+			android:layout_centerVertical="true"/>
+		
+		<ImageButton
+			android:id="@+id/ibAccept"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_accept_white_24dp"
+			android:backgroundTint="@android:color/transparent"
+			android:layout_alignParentEnd="true"
+			android:layout_centerVertical="true"/>
+	
+	</RelativeLayout>
+
+</android.support.v7.widget.CardView>

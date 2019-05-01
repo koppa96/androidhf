@@ -5,6 +5,7 @@ import android.databinding.Bindable
 import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.interfaces.RegisterView
 
@@ -77,9 +78,15 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if(it.isSuccessful) {
+                    val profileUpdate = UserProfileChangeRequest.Builder()
+                        .setDisplayName(username)
+                        .build()
+
+                    auth.currentUser!!.updateProfile(profileUpdate)
                     val uid = auth.currentUser!!.uid
 
                     val userData = HashMap<String, Any>()
+                    userData["uid"] = uid
                     userData["name"] = username
 
                     db.collection("Users").document(uid).set(userData).addOnCompleteListener {

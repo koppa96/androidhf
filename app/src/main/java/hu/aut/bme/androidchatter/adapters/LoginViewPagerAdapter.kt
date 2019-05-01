@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import hu.aut.bme.androidchatter.fragments.LoginFragment
 import hu.aut.bme.androidchatter.fragments.RegisterFragment
 
-class LoginViewPagerAdapter(val fm : FragmentManager) : FragmentPagerAdapter(fm) {
+class LoginViewPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(p0: Int): Fragment {
         return when (p0) {
             0 -> LoginFragment()
