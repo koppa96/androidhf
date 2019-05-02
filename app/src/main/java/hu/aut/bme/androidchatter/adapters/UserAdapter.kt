@@ -27,11 +27,11 @@ class UserAdapter(options : FirestoreRecyclerOptions<User>) : FirestoreRecyclerA
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvUsername : TextView = itemView.tvUsername
 
-        var user : User? = null
+        lateinit var user : User
 
         init {
             itemView.setOnClickListener {
-                userClickListener?.onUserClicked(user!!)
+                userClickListener?.onUserClicked(user)
             }
         }
     }

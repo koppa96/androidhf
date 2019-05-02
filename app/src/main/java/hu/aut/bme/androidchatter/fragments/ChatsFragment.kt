@@ -1,5 +1,6 @@
 package hu.aut.bme.androidchatter.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import hu.aut.bme.androidchatter.ChatActivity
 import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.adapters.ChatAdapter
 import hu.aut.bme.androidchatter.adapters.ReceivedRequestAdapter
@@ -60,6 +62,8 @@ class ChatsFragment : Fragment(), ChatAdapter.ChatClickListener {
     }
 
     override fun onChatClicked(chat: Chat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(context, ChatActivity::class.java)
+        intent.putExtra("chat", chat)
+        startActivity(intent)
     }
 }

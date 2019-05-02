@@ -2,6 +2,7 @@ package hu.aut.bme.androidchatter.models
 
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ServerTimestamp
+import java.io.Serializable
 import java.util.*
 
 data class Chat (
@@ -13,7 +14,7 @@ data class Chat (
     var lastMessageSentBy: String? = null,
     var lastMessage: String? = null,
     @ServerTimestamp var timestamp: Date? = null
-) {
+) : Serializable {
     companion object {
         val COLLECTION_NAME = "Chats"
         val CHAT_ID = "chatId"

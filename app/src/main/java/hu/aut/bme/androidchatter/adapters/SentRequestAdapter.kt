@@ -29,11 +29,11 @@ class SentRequestAdapter(options: FirestoreRecyclerOptions<Request>) : Firestore
         val tvReceiverName: TextView = itemView.tvReceiverName
         val ibCancel: ImageButton = itemView.ibCancel
 
-        var request: Request? = null
+        lateinit var request: Request
 
         init {
             ibCancel.setOnClickListener {
-                sentRequestActionListener?.onCanceled(request!!)
+                sentRequestActionListener?.onCanceled(request)
             }
         }
     }

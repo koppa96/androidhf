@@ -35,11 +35,11 @@ class ChatAdapter(options: FirestoreRecyclerOptions<Chat>, private val context: 
         val tvOtherName = itemView.tvOtherName
         val tvLastMessage = itemView.tvLastMessage
 
-        var chat: Chat? = null
+        lateinit var chat: Chat
 
         init {
             itemView.setOnClickListener {
-                chatClickListener?.onChatClicked(chat!!)
+                chatClickListener?.onChatClicked(chat)
             }
         }
     }

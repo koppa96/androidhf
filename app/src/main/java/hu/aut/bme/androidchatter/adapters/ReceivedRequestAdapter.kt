@@ -31,15 +31,15 @@ class ReceivedRequestAdapter(private val options: FirestoreRecyclerOptions<Reque
         val ibDelete: ImageButton = itemView.ibReject
         val ibAccept: ImageButton = itemView.ibAccept
 
-        var request: Request? = null
+        lateinit var request: Request
 
         init {
             ibAccept.setOnClickListener {
-                receivedRequestActionListener?.onRequestAccepted(request!!)
+                receivedRequestActionListener?.onRequestAccepted(request)
             }
 
             ibDelete.setOnClickListener {
-                receivedRequestActionListener?.onRequestRejected(request!!)
+                receivedRequestActionListener?.onRequestRejected(request)
             }
         }
     }
