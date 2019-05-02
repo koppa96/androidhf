@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.interfaces.RegisterView
+import hu.aut.bme.androidchatter.models.User
 
 class RegisterViewModel(private val registerView: RegisterView) : BaseObservable() {
     private val auth = FirebaseAuth.getInstance()
@@ -55,7 +56,7 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
         }
 
         registerView.startLoadingAnimation()
-        db.collection("Users").whereEqualTo("name", username).get().addOnCompleteListener {
+        db.collection(User.COLLECTION_NAME).whereEqualTo(User.NAME, username).get().addOnCompleteListener {
             if (it.isSuccessful) {
                 it.result?.let {
                     if (!it.isEmpty) {
@@ -85,11 +86,9 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
                     auth.currentUser!!.updateProfile(profileUpdate)
                     val uid = auth.currentUser!!.uid
 
-                    val userData = HashMap<String, Any>()
-                    userData["uid"] = uid
-                    userData["name"] = username
+                    val userData = User(name = username, uid = uid)
 
-                    db.collection("Users").document(uid).set(userData).addOnCompleteListener {
+                    db.collection(User.COLLECTION_NAME).document(uid).set(userData).addOnCompleteListener {
                         if (it.isSuccessful) {
                             registerView.onSuccessfulRegister()
                         } else {

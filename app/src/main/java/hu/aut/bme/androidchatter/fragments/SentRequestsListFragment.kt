@@ -14,10 +14,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.adapters.SentRequestAdapter
 import hu.aut.bme.androidchatter.models.Request
+import hu.aut.bme.androidchatter.viewmodels.SentRequestsViewModel
 
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class SentRequestsListFragment : Fragment(), SentRequestAdapter.SentRequestActionListener {
+class SentRequestsListFragment : Fragment() {
     private lateinit var adapter: SentRequestAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,19 +40,12 @@ class SentRequestsListFragment : Fragment(), SentRequestAdapter.SentRequestActio
             .build()
 
         adapter = SentRequestAdapter(options)
-        adapter.sentRequestActionListener = this
+        adapter.sentRequestActionListener = SentRequestsViewModel(context!!)
 
         recyclerView.emptyView = tvEmptyList
         recyclerView.emptyMessage = getString(R.string.no_requests_sent)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-    }
-
-    override fun onCanceled(request: Request) {
-        val db = FirebaseFirestore.getInstance()
-        db.collection(Request.COLLECTION_NAME).document(request.requestId!!).delete().addOnSuccessListener {
-            Toast.makeText(context, getString(R.string.request_canceled), Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onStart() {

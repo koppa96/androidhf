@@ -38,4 +38,7 @@
     <string name="no_incoming_requests">You have no incoming requests.</string>
     <string name="request_accepted">Request accepted</string>
     <string name="request_rejected">Request rejected</string>
+	<string name="message">Message</string>
+	<string name="no_chats">You have no chats yet.</string>
+    <string name="no_messages">No messages yet.</string>
 </resources>

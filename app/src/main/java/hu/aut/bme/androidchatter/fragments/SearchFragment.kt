@@ -20,9 +20,10 @@ import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.adapters.UserAdapter
 import hu.aut.bme.androidchatter.models.Request
 import hu.aut.bme.androidchatter.models.User
+import hu.aut.bme.androidchatter.viewmodels.UserListViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class SearchFragment : Fragment(), UserAdapter.UserClickListener {
+class SearchFragment : Fragment() {
     private lateinit var adapter: FirestoreRecyclerAdapter<User, UserAdapter.UserViewHolder>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,15 +40,13 @@ class SearchFragment : Fragment(), UserAdapter.UserClickListener {
             .build()
 
         val userAdapter = UserAdapter(options)
-        userAdapter.userClickListener = this
+        userAdapter.userClickListener = UserListViewModel(context!!)
         adapter = userAdapter
 
         recyclerView.emptyView = tvEmptyList
         recyclerView.emptyMessage = getString(R.string.no_users)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
-
-
     }
 
     override fun onStart() {
@@ -58,74 +57,5 @@ class SearchFragment : Fragment(), UserAdapter.UserClickListener {
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
-    }
-
-    override fun onUserClicked(user: User) {
-        val db = FirebaseFirestore.getInstance()
-        val currentUser = FirebaseAuth.getInstance().currentUser!!
-        if (currentUser.uid == user.uid) {
-            Toast.makeText(context, getString(R.string.self_request_error), Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        db.collection(Request.COLLECTION_NAME)
-            .whereEqualTo(Request.SENDER_ID, currentUser.uid)
-            .whereEqualTo(Request.RECEIVER_ID, user.uid)
-            .get()
-            .addOnSuccessListener {
-                it?.let {
-                    if (!it.isEmpty) {
-                        Toast.makeText(context, getString(R.string.already_sent_request, user.name), Toast.LENGTH_SHORT)
-                            .show()
-                        return@addOnSuccessListener
-                    }
-                }
-
-                db.collection(Request.COLLECTION_NAME)
-                    .whereEqualTo(Request.SENDER_ID, user.uid)
-                    .whereEqualTo(Request.RECEIVER_ID, currentUser.uid)
-                    .get()
-                    .addOnSuccessListener {
-                        it?.let {
-                            if (!it.isEmpty) {
-                                Toast.makeText(context, getString(R.string.already_received_request, user.name), Toast.LENGTH_SHORT).show()
-                                return@addOnSuccessListener
-                            }
-                        }
-
-                        AlertDialog.Builder(activity!!)
-                            .setTitle(getString(R.string.confirm_action))
-                            .setMessage(getString(R.string.confirm_request_send_text, user.name))
-                            .setCancelable(true)
-                            .setNegativeButton(getString(R.string.no), null)
-                            .setPositiveButton(getString(R.string.yes)) { dialogInterface: DialogInterface, i: Int ->
-                                sendRequest(user)
-                            }
-                            .create()
-                            .show()
-                    }
-
-            }
-    }
-
-    fun sendRequest(user: User) {
-        val db = FirebaseFirestore.getInstance()
-        val currentUser = FirebaseAuth.getInstance().currentUser!!
-
-        val request = Request(
-            requestId = db.collection(Request.COLLECTION_NAME).document().id,
-            senderId = currentUser.uid,
-            senderName = currentUser.displayName,
-            receiverId = user.uid,
-            receiverName = user.name
-        )
-
-        db.collection(Request.COLLECTION_NAME).document(request.requestId!!).set(request).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Toast.makeText(context, getString(R.string.request_sent), Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, getString(R.string.failed_to_send_request), Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	style="@style/CardViewStyle"
+	android:layout_height="wrap_content">
+	
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		
+		<ImageView
+			android:id="@+id/ivProfile"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_person_black_35dp"
+			android:layout_alignParentStart="true"
+			android:layout_centerVertical="true"/>
+		
+		<TextView
+			android:id="@+id/tvOtherName"
+			android:text="@string/username"
+			android:textSize="18sp"
+			android:layout_marginStart="8dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toEndOf="@id/ivProfile"
+			android:layout_alignParentTop="true"/>
+		
+		<TextView
+			android:id="@+id/tvLastMessage"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_below="@id/tvOtherName"
+			android:layout_toEndOf="@id/ivProfile"
+			android:text="@string/message"
+			android:maxLines="1"/>
+	
+	</RelativeLayout>
+
+</android.support.v7.widget.CardView>

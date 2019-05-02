@@ -14,9 +14,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.adapters.ReceivedRequestAdapter
 import hu.aut.bme.androidchatter.models.Request
+import hu.aut.bme.androidchatter.viewmodels.ReceivedRequestsViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class ReceivedRequestsListFragment : Fragment(), ReceivedRequestAdapter.ReceivedRequestActionListener {
+class ReceivedRequestsListFragment : Fragment() {
     private lateinit var adapter: ReceivedRequestAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,23 +39,12 @@ class ReceivedRequestsListFragment : Fragment(), ReceivedRequestAdapter.Received
             .build()
 
         adapter = ReceivedRequestAdapter(options)
-        adapter.receivedRequestActionListener = this
+        adapter.receivedRequestActionListener = ReceivedRequestsViewModel(context!!)
 
         recyclerView.emptyView = tvEmptyList
         recyclerView.emptyMessage = getString(R.string.no_incoming_requests)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-    }
-
-    override fun onRequestAccepted(request: Request) {
-        Toast.makeText(context, getString(R.string.request_accepted), Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onRequestRejected(request: Request) {
-        val db = FirebaseFirestore.getInstance()
-        db.collection(Request.COLLECTION_NAME).document(request.requestId!!).delete().addOnSuccessListener {
-            Toast.makeText(context, getString(R.string.request_rejected), Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onStart() {

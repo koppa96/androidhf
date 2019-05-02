@@ -39,4 +39,7 @@
     <string name="no_incoming_requests">Nincs bejövő felkérésed</string>
     <string name="request_accepted">Felkérés elfogadva</string>
     <string name="request_rejected">Felkérés elutasítva</string>
+	<string name="message">Üzenet</string>
+	<string name="no_chats">Még nincsenek beszélgetéseid.</string>
+    <string name="no_messages">Még nincs üzenet.</string>
 </resources>
