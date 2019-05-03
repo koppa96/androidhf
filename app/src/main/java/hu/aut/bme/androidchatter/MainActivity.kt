@@ -44,20 +44,15 @@ class MainActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
+        val user = mAuth?.currentUser
+        if (user == null) {
+            navigateToLogin()
+        }
 
         setSupportActionBar(toolbar)
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
 
         bottomNavigationView.selectedItemId = R.id.navChats
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val user = mAuth?.currentUser
-        if (user == null) {
-            navigateToLogin()
-        }
     }
 
     private fun navigateToLogin() {

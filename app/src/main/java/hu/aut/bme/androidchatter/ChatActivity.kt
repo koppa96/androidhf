@@ -50,20 +50,28 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.emptyView = tvEmptyList
         recyclerView.emptyMessage = getString(R.string.no_messages)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
 
-        recyclerView.smoothScrollToPosition(adapter.itemCount)
+        recyclerView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            if (bottom < oldBottom) {
+                recyclerView.postDelayed({
+                    recyclerView.smoothScrollToPosition(adapter.itemCount)
+                }, 100)
+            }
+        }
+
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
-                recyclerView.smoothScrollToPosition(adapter.itemCount)
+                recyclerView.postDelayed({
+                    recyclerView.smoothScrollToPosition(adapter.itemCount)
+                }, 100)
             }
 
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                recyclerView.smoothScrollToPosition(adapter.itemCount)
-            }
-
-            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                recyclerView.smoothScrollToPosition(adapter.itemCount)
+                recyclerView.postDelayed({
+                    recyclerView.smoothScrollToPosition(adapter.itemCount)
+                }, 100)
             }
         })
     }

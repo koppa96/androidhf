@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.google.firebase.auth.FirebaseAuth
 import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.models.Chat
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.item_chat.view.*
 class ChatAdapter(options: FirestoreRecyclerOptions<Chat>, private val context: Context) : FirestoreRecyclerAdapter<Chat, ChatAdapter.ChatViewHolder>(options) {
     private val auth = FirebaseAuth.getInstance()
     var chatClickListener: ChatClickListener? = null
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_chat, parent, false)
