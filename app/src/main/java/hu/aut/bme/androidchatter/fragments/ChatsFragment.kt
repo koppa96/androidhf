@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import hu.aut.bme.androidchatter.ChatActivity
 import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.adapters.ChatAdapter
@@ -36,7 +37,7 @@ class ChatsFragment : Fragment(), ChatAdapter.ChatClickListener {
         val query = db.collection(User.COLLECTION_NAME)
             .document(auth.currentUser!!.uid)
             .collection(Chat.COLLECTION_NAME)
-            .orderBy(Chat.TIMESTAMP)
+            .orderBy(Chat.TIMESTAMP, Query.Direction.DESCENDING)
 
         val options = FirestoreRecyclerOptions.Builder<Chat>()
             .setQuery(query, Chat::class.java)

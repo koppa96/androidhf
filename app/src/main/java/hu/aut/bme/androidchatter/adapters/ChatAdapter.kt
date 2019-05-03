@@ -28,7 +28,7 @@ class ChatAdapter(options: FirestoreRecyclerOptions<Chat>, private val context: 
         if (model.lastMessage == null || model.lastMessageSentBy == null) {
             holder.tvLastMessage.text = context.getString(R.string.no_messages)
         } else {
-            holder.tvLastMessage.text = "${model.lastMessageSentBy}: ${model.lastMessage}"
+            holder.tvLastMessage.text = "${if (model.lastMessageSentBy == model.user1Id) model.user1Name else model.user2Name}: ${model.lastMessage}"
         }
         holder.chat = model
     }

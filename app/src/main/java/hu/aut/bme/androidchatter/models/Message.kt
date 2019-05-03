@@ -7,7 +7,6 @@ data class Message (
     var messageId: String? = null,
     var chatId: String? = null,
     var senderId: String? = null,
-    var senderName: String? = null,
     var content: String? = null,
     @ServerTimestamp var timestamp: Date? = null
 ) {
@@ -16,7 +15,6 @@ data class Message (
         val MESSAGE_ID = "messageId"
         val CHAT_ID = "chatId"
         val SENDER_ID = "senderId"
-        val SENDER_NAME = "senderName"
         val CONTENT = "content"
         val TIMESTAMP = "timestamp"
     }
