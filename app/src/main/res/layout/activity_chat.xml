@@ -44,7 +44,10 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="@color/colorDarkerBackgroundAlpha"
-			android:layout_alignParentBottom="true">
+			android:layout_alignParentBottom="true"
+			android:paddingTop="8dp"
+			android:paddingBottom="8dp"
+			android:clipToPadding="false">
 			
 			<EditText
 				android:layout_width="wrap_content"
