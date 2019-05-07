@@ -1,4 +1,4 @@
-package hu.aut.bme.androidchatter.view
+package hu.aut.bme.androidchatter.views
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

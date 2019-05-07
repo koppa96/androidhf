@@ -9,7 +9,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.interfaces.RegisterView
 import hu.aut.bme.androidchatter.models.User
-import hu.aut.bme.androidchatter.view.LoadingButton
+import hu.aut.bme.androidchatter.views.LoadingButton
 
 class RegisterViewModel(private val registerView: RegisterView) : BaseObservable() {
     private val auth = FirebaseAuth.getInstance()

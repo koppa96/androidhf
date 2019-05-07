@@ -25,7 +25,7 @@
 			android:elevation="4dp"
 			app:titleTextColor="@android:color/primary_text_dark" />
 		
-		<hu.aut.bme.androidchatter.view.EmptyRecyclerView
+		<hu.aut.bme.androidchatter.views.EmptyRecyclerView
 			android:id="@+id/recyclerView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

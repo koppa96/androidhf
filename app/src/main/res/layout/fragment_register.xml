@@ -51,7 +51,7 @@
         
         </android.support.design.widget.TextInputLayout>
         
-        <hu.aut.bme.androidchatter.view.LoadingButton
+        <hu.aut.bme.androidchatter.views.LoadingButton
             android:text="@string/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
