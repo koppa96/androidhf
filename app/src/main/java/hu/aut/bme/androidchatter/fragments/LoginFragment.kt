@@ -27,6 +27,12 @@ class LoginFragment : Fragment(), LoginView {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnLogin.loadingView = loginLoading
+    }
+
     override fun onSuccessfulLogin() {
         val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
@@ -43,21 +49,5 @@ class LoginFragment : Fragment(), LoginView {
 
     override fun setPasswordError() {
         etPassword.error = getString(R.string.field_must_be_filled)
-    }
-
-    override fun startLoadingAnimation() {
-        val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
-        btnLogin.startAnimation(scaleDown)
-        btnLogin.isEnabled = false
-
-        loginLoading.visibility = View.VISIBLE
-    }
-
-    override fun stopLoadingAnimation() {
-        loginLoading.visibility = View.GONE
-
-        val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
-        btnLogin.startAnimation(scaleUp)
-        btnLogin.isEnabled = true
     }
 }

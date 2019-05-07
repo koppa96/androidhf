@@ -7,6 +7,7 @@ import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 import com.google.firebase.auth.FirebaseAuth
 import hu.aut.bme.androidchatter.interfaces.LoginView
+import hu.aut.bme.androidchatter.view.LoadingButton
 import kotlin.math.log
 
 class LoginViewModel(private val loginView : LoginView) : BaseObservable() {
@@ -41,12 +42,13 @@ class LoginViewModel(private val loginView : LoginView) : BaseObservable() {
             return
         }
 
-        loginView.startLoadingAnimation()
+        val button: LoadingButton? = if (view is LoadingButton) view as LoadingButton else null
+        button?.startLoadingAnimation()
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 loginView.onSuccessfulLogin()
             } else {
-                loginView.stopLoadingAnimation()
+                button?.stopLoadingAnimation()
                 loginView.showLoginError()
             }
         }

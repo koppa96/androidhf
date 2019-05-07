@@ -9,6 +9,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.interfaces.RegisterView
 import hu.aut.bme.androidchatter.models.User
+import hu.aut.bme.androidchatter.view.LoadingButton
 
 class RegisterViewModel(private val registerView: RegisterView) : BaseObservable() {
     private val auth = FirebaseAuth.getInstance()
@@ -55,27 +56,28 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
             return
         }
 
-        registerView.startLoadingAnimation()
+        val button: LoadingButton? = if (view is LoadingButton) view as LoadingButton else null
+        button?.startLoadingAnimation()
         db.collection(User.COLLECTION_NAME).whereEqualTo(User.NAME, username).get().addOnCompleteListener {
             if (it.isSuccessful) {
                 it.result?.let {
                     if (!it.isEmpty) {
                         registerView.setUsernameTakenError()
-                        registerView.stopLoadingAnimation()
+                        button?.stopLoadingAnimation()
                         return@addOnCompleteListener
                     }
                 }
 
-                createUser()
+                createUser(button)
 
             } else {
                 registerView.showUserCreationError()
-                registerView.stopLoadingAnimation()
+                button?.stopLoadingAnimation()
             }
         }
     }
 
-    private fun createUser() {
+    private fun createUser(button: LoadingButton? = null) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if(it.isSuccessful) {
@@ -93,12 +95,12 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
                             registerView.onSuccessfulRegister()
                         } else {
                             registerView.showUserCreationError()
-                            registerView.stopLoadingAnimation()
+                            button?.stopLoadingAnimation()
                         }
                     }
                 } else {
                     registerView.showUserCreationError()
-                    registerView.stopLoadingAnimation()
+                    button?.stopLoadingAnimation()
                 }
             }
     }

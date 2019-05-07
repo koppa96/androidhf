@@ -24,6 +24,12 @@ class RegisterFragment : Fragment(), RegisterView {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnRegister.loadingView = registerLoading
+    }
+
     override fun setPasswordError() {
         etPassword.error = getString(R.string.field_must_be_filled)
     }
@@ -57,20 +63,5 @@ class RegisterFragment : Fragment(), RegisterView {
 
     override fun setUsernameError() {
         etUsername.error = getString(R.string.field_must_be_filled)
-    }
-
-    override fun startLoadingAnimation() {
-        val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_down)
-        btnRegister.startAnimation(scaleDown)
-        btnRegister.isEnabled = false
-        registerLoading.visibility = View.VISIBLE
-    }
-
-    override fun stopLoadingAnimation() {
-        registerLoading.visibility = View.GONE
-
-        val scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up)
-        btnRegister.startAnimation(scaleUp)
-        btnRegister.isEnabled = true
     }
 }
