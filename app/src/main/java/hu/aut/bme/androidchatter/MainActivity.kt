@@ -1,8 +1,6 @@
 package hu.aut.bme.androidchatter
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -16,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
-    private var onSettinsFragment : Boolean = false
+    private var onSettingsFragment : Boolean = false
 
     private val bottomNavigationListener = BottomNavigationView.OnNavigationItemSelectedListener {
         navigateFragmentByMenuId(it.itemId)
@@ -106,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 bottomNavigationView.startAnimation(animation)
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 supportActionBar?.setDisplayShowHomeEnabled(true)
-                onSettinsFragment = true
+                onSettingsFragment = true
             }
 
             android.R.id.home -> navigateBackFromSettings()
@@ -124,11 +122,11 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(false)
 
         navigateFragmentByMenuId(bottomNavigationView.selectedItemId)
-        onSettinsFragment = false
+        onSettingsFragment = false
     }
 
     override fun onBackPressed() {
-        if (onSettinsFragment) {
+        if (onSettingsFragment) {
             navigateBackFromSettings()
         } else {
             super.onBackPressed()

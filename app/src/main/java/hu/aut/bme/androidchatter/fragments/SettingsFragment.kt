@@ -3,6 +3,7 @@ package hu.aut.bme.androidchatter.fragments
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
@@ -15,23 +16,24 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import hu.aut.bme.androidchatter.MainActivity
 import hu.aut.bme.androidchatter.R
+import hu.aut.bme.androidchatter.databinding.FragmentSettingsBinding
 import hu.aut.bme.androidchatter.models.User
+import hu.aut.bme.androidchatter.viewmodels.SettingsViewModel
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
-    private lateinit var user : FirebaseUser
     private lateinit var prefs: SharedPreferences
 
     companion object {
         val THEME_KEY = "theme"
         val THEME_DARK = "dark"
         val THEME_LIGHT = "light"
-        val PREF_NAME = "settings"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        user = FirebaseAuth.getInstance().currentUser!!
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val binding = DataBindingUtil.inflate<FragmentSettingsBinding>(inflater, R.layout.fragment_settings, container, false)
+        binding.viewModel = SettingsViewModel()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,12 +46,14 @@ class SettingsFragment : Fragment() {
             else -> throw UnsupportedOperationException("Unknown theme name")
         }
 
-        btnSaveTheme.setOnClickListener {
-            changeTheme()
-        }
+        btnChangePassword.loadingView = passwordProgress
+        btnChangeEmail.loadingView = emailProgress
+        btnChangeUsername.loadingView = usernameProgress
+
+        btnSaveTheme.setOnClickListener(::changeTheme)
     }
 
-    private fun changeTheme() {
+    fun changeTheme(view: View) {
         val selectedTheme = when (radioGroup.checkedRadioButtonId) {
             R.id.btnDark -> THEME_DARK
             R.id.btnLight -> THEME_LIGHT

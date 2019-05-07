@@ -28,7 +28,8 @@
                 android:id="@+id/etUsername"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@={viewModel.username}"/>
+                android:text="@={viewModel.username}"
+                android:backgroundTint="?attr/iconColor"/>
         
         </android.support.design.widget.TextInputLayout>
         
@@ -47,7 +48,8 @@
                 android:id="@+id/etPassword"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@={viewModel.password}"/>
+                android:text="@={viewModel.password}"
+                android:backgroundTint="?attr/iconColor"/>
         
         </android.support.design.widget.TextInputLayout>
         
@@ -98,7 +100,8 @@
                 android:id="@+id/etConfirmPassword"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@={viewModel.confirmPassword}"/>
+                android:text="@={viewModel.confirmPassword}"
+                android:backgroundTint="?attr/iconColor"/>
         
         </android.support.design.widget.TextInputLayout>
         
@@ -119,7 +122,8 @@
                 android:id="@+id/etEmail"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@={viewModel.email}"/>
+                android:text="@={viewModel.email}"
+                android:backgroundTint="?attr/iconColor"/>
         
         </android.support.design.widget.TextInputLayout>
     

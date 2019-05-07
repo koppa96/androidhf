@@ -4,9 +4,12 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.view.View
 import com.android.databinding.library.baseAdapters.BR
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import hu.aut.bme.androidchatter.adapters.ChatAdapter
+import hu.aut.bme.androidchatter.adapters.MessageAdapter
 import hu.aut.bme.androidchatter.models.Chat
 import hu.aut.bme.androidchatter.models.Message
 import hu.aut.bme.androidchatter.models.User
@@ -23,6 +26,19 @@ class ChatViewModel(private val chat: Chat) : BaseObservable() {
                 notifyPropertyChanged(BR.content)
             }
         }
+
+    fun setUpAdapter() : MessageAdapter {
+        val db = FirebaseFirestore.getInstance()
+        val query = db.collection(Message.COLLECTION_NAME)
+            .whereEqualTo(Message.CHAT_ID, chat.chatId)
+            .orderBy(Message.TIMESTAMP)
+
+        val options = FirestoreRecyclerOptions.Builder<Message>()
+            .setQuery(query, Message::class.java)
+            .build()
+
+        return MessageAdapter(options)
+    }
 
     fun sendButtonClicked(view: View) {
         if (content.isBlank()) {

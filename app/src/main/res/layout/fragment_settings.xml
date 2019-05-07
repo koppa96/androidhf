@@ -1,243 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:scrollbars="none">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 	
-	<LinearLayout
+	<data>
+		<variable
+			name="viewModel"
+			type="hu.aut.bme.androidchatter.viewmodels.SettingsViewModel" />
+	</data>
+	
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="10dp"
-		android:layout_marginEnd="10dp"
-		android:orientation="vertical"
-		android:paddingTop="15dp"
-		android:paddingBottom="15dp">
+		android:layout_height="match_parent"
+		android:scrollbars="none">
 		
-		<android.support.v7.widget.CardView
-			style="@style/CardViewStyle"
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
+			android:orientation="vertical"
+			android:paddingTop="15dp"
+			android:paddingBottom="15dp">
 			
-			<LinearLayout
+			<android.support.v7.widget.CardView
+				style="@style/CardViewStyle"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
+				android:layout_height="wrap_content">
 				
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="16dp"
-					android:text="@string/change_password"
-					android:textColor="?attr/colorAccent"
-					android:textSize="18sp"
-					android:textStyle="bold" />
-				
-				<android.support.design.widget.TextInputLayout
+				<LinearLayout
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
-					
-					<EditText
-						android:id="@+id/etCurrentPassword"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:hint="@string/current_password"
-						android:inputType="textPassword" />
-				
-				</android.support.design.widget.TextInputLayout>
-				
-				<android.support.design.widget.TextInputLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
-					
-					<EditText
-						android:id="@+id/etNewPassword"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:hint="@string/new_password"
-						android:inputType="textPassword" />
-				
-				</android.support.design.widget.TextInputLayout>
-				
-				<android.support.design.widget.TextInputLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
-					
-					<EditText
-						android:id="@+id/etConfirmPassword"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:hint="@string/confirm_password"
-						android:inputType="textPassword" />
-				
-				</android.support.design.widget.TextInputLayout>
-				
-				<Button
-					android:id="@+id/btnChangePassword"
-					style="@style/CurvedButtonStyle"
-					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
-					android:layout_marginTop="16dp"
-					android:text="@string/change_password" />
-			
-			</LinearLayout>
-		</android.support.v7.widget.CardView>
-		
-		<android.support.v7.widget.CardView
-			style="@style/CardViewStyle"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
-				
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="16dp"
-					android:text="@string/change_e_mail_address"
-					android:textColor="?attr/colorAccent"
-					android:textSize="18sp"
-					android:textStyle="bold" />
-				
-				<android.support.design.widget.TextInputLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
+					android:orientation="vertical">
 					
-					<EditText
-						android:id="@+id/etNewEmail"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:hint="@string/e_mail"
-						android:inputType="textEmailAddress" />
-				
-				</android.support.design.widget.TextInputLayout>
-				
-				<android.support.design.widget.TextInputLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
-					
-					<EditText
-						android:id="@+id/etPassword"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:hint="@string/password"
-						android:inputType="textPassword" />
-				
-				</android.support.design.widget.TextInputLayout>
-				
-				<Button
-					android:id="@+id/btnChangeEmail"
-					style="@style/CurvedButtonStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
-					android:layout_marginTop="16dp"
-					android:text="@string/change_e_mail_address" />
-			
-			</LinearLayout>
-		
-		</android.support.v7.widget.CardView>
-		
-		<android.support.v7.widget.CardView
-			style="@style/CardViewStyle"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
-				
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="16dp"
-					android:text="@string/change_username"
-					android:textColor="?attr/colorAccent"
-					android:textSize="18sp"
-					android:textStyle="bold" />
-				
-				<android.support.design.widget.TextInputLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
-					
-					<EditText
-						android:id="@+id/etNewUsername"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:hint="@string/username"
-						android:inputType="textVisiblePassword|textNoSuggestions" />
-				
-				</android.support.design.widget.TextInputLayout>
-				
-				<Button
-					android:id="@+id/btnChangeUsername"
-					style="@style/CurvedButtonStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
-					android:layout_marginTop="16dp"
-					android:text="@string/change_username" />
-			
-			</LinearLayout>
-		
-		</android.support.v7.widget.CardView>
-		
-		<android.support.v7.widget.CardView
-			style="@style/CardViewStyle"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
-				
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="16dp"
-					android:text="@string/choose_theme"
-					android:textColor="?attr/colorAccent"
-					android:textSize="18sp"
-					android:textStyle="bold" />
-				
-				<RadioGroup
-					android:id="@+id/radioGroup"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content">
-					
-					<RadioButton
-						android:id="@+id/btnLight"
+					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/light" />
+						android:layout_marginBottom="16dp"
+						android:text="@string/change_password"
+						android:textColor="?attr/colorAccent"
+						android:textSize="18sp"
+						android:textStyle="bold" />
 					
-					<RadioButton
-						android:id="@+id/btnDark"
+					<android.support.design.widget.TextInputLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<EditText
+							android:id="@+id/etCurrentPassword"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/current_password"
+							android:inputType="textPassword"
+							android:text="@={viewModel.oldPassword}"
+							android:backgroundTint="?attr/iconColor"/>
+					
+					</android.support.design.widget.TextInputLayout>
+					
+					<android.support.design.widget.TextInputLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<EditText
+							android:id="@+id/etNewPassword"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/new_password"
+							android:inputType="textPassword"
+							android:text="@={viewModel.newPassword}"
+							android:backgroundTint="?attr/iconColor"/>
+					
+					</android.support.design.widget.TextInputLayout>
+					
+					<android.support.design.widget.TextInputLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<EditText
+							android:id="@+id/etConfirmPassword"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/confirm_password"
+							android:inputType="textPassword"
+							android:text="@={viewModel.confirmPassword}"
+							android:backgroundTint="?attr/iconColor"/>
+					
+					</android.support.design.widget.TextInputLayout>
+					
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="16dp">
+						
+						<hu.aut.bme.androidchatter.views.LoadingButton
+							android:id="@+id/btnChangePassword"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/CurvedButtonStyle"
+							android:layout_centerHorizontal="true"
+							android:text="@string/change_password"
+							android:onClick="@{viewModel::passwordChangeButtonClicked}"/>
+						
+						<ProgressBar
+							android:id="@+id/passwordProgress"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:visibility="gone"
+							android:layout_centerHorizontal="true"/>
+					
+					</RelativeLayout>
+				
+				</LinearLayout>
+			</android.support.v7.widget.CardView>
+			
+			<android.support.v7.widget.CardView
+				style="@style/CardViewStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+					
+					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/dark" />
+						android:layout_marginBottom="16dp"
+						android:text="@string/change_e_mail_address"
+						android:textColor="?attr/colorAccent"
+						android:textSize="18sp"
+						android:textStyle="bold" />
+					
+					<android.support.design.widget.TextInputLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<EditText
+							android:id="@+id/etNewEmail"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/e_mail"
+							android:inputType="textEmailAddress"
+							android:text="@={viewModel.email}"
+							android:backgroundTint="?attr/iconColor"/>
+					
+					</android.support.design.widget.TextInputLayout>
+					
+					<android.support.design.widget.TextInputLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<EditText
+							android:id="@+id/etPassword"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/password"
+							android:inputType="textPassword"
+							android:text="@={viewModel.emailConfirmationPassword}"
+							android:backgroundTint="?attr/iconColor"/>
+					
+					</android.support.design.widget.TextInputLayout>
+					
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="16dp">
+						
+						<hu.aut.bme.androidchatter.views.LoadingButton
+							android:id="@+id/btnChangeEmail"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/CurvedButtonStyle"
+							android:layout_centerHorizontal="true"
+							android:text="@string/change_e_mail_address"
+							android:onClick="@{viewModel::emailChangeButtonClicked}"/>
+						
+						<ProgressBar
+							android:id="@+id/emailProgress"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:visibility="gone"
+							android:layout_centerHorizontal="true"/>
+					
+					</RelativeLayout>
 				
-				</RadioGroup>
-				
-				<Button
-					android:id="@+id/btnSaveTheme"
-					style="@style/CurvedButtonStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
-					android:layout_marginTop="16dp"
-					android:text="@string/change_theme" />
+				</LinearLayout>
 			
-			</LinearLayout>
+			</android.support.v7.widget.CardView>
+			
+			<android.support.v7.widget.CardView
+				style="@style/CardViewStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+					
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="16dp"
+						android:text="@string/change_username"
+						android:textColor="?attr/colorAccent"
+						android:textSize="18sp"
+						android:textStyle="bold" />
+					
+					<android.support.design.widget.TextInputLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<EditText
+							android:id="@+id/etNewUsername"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/username"
+							android:inputType="textVisiblePassword|textNoSuggestions"
+							android:text="@={viewModel.username}"
+							android:backgroundTint="?attr/iconColor"/>
+					
+					</android.support.design.widget.TextInputLayout>
+					
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="16dp">
+						
+						<hu.aut.bme.androidchatter.views.LoadingButton
+							android:id="@+id/btnChangeUsername"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/CurvedButtonStyle"
+							android:layout_centerHorizontal="true"
+							android:text="@string/change_username"
+							android:onClick="@{viewModel::usernameChangeButtonClicked}"/>
+						
+						<ProgressBar
+							android:id="@+id/usernameProgress"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:visibility="gone"
+							android:layout_centerHorizontal="true"/>
+					
+					</RelativeLayout>
+				
+				</LinearLayout>
+			
+			</android.support.v7.widget.CardView>
+			
+			<android.support.v7.widget.CardView
+				style="@style/CardViewStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+					
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="16dp"
+						android:text="@string/choose_theme"
+						android:textColor="?attr/colorAccent"
+						android:textSize="18sp"
+						android:textStyle="bold" />
+					
+					<RadioGroup
+						android:id="@+id/radioGroup"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content">
+						
+						<RadioButton
+							android:id="@+id/btnLight"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/light" />
+						
+						<RadioButton
+							android:id="@+id/btnDark"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/dark" />
+					
+					</RadioGroup>
+					
+					<Button
+						android:id="@+id/btnSaveTheme"
+						style="@style/CurvedButtonStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_horizontal"
+						android:layout_marginTop="16dp"
+						android:text="@string/change_theme" />
+				
+				</LinearLayout>
+			
+			</android.support.v7.widget.CardView>
 		
-		</android.support.v7.widget.CardView>
+		</LinearLayout>
 	
-	</LinearLayout>
-
-</ScrollView>
+	</ScrollView>
+</layout>

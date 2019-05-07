@@ -46,23 +46,15 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val db = FirebaseFirestore.getInstance()
-        val query = db.collection(Message.COLLECTION_NAME)
-            .whereEqualTo(Message.CHAT_ID, chat.chatId)
-            .orderBy(Message.TIMESTAMP)
-
-        val options = FirestoreRecyclerOptions.Builder<Message>()
-            .setQuery(query, Message::class.java)
-            .build()
-
-        adapter = MessageAdapter(options)
+        adapter = binding.viewModel!!.setUpAdapter()
         recyclerView.emptyView = tvEmptyList
         recyclerView.emptyMessage = getString(R.string.no_messages)
         recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        recyclerView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+        // Scroll down on keyboard opening
+        recyclerView.addOnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
             if (bottom < oldBottom) {
                 recyclerView.postDelayed({
                     recyclerView.smoothScrollToPosition(adapter.itemCount)
@@ -70,6 +62,7 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
+        // Scroll down on data addition
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 recyclerView.postDelayed({
