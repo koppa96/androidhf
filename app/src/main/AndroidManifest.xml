@@ -13,13 +13,13 @@
 		android:supportsRtl="true">
 		<activity
 			android:name=".ChatActivity"
-			android:theme="@style/AppThemeActionbar"
+			android:theme="@style/AppThemeActionbarLight"
 			android:screenOrientation="portrait"
 			android:windowSoftInputMode="adjustResize"></activity>
 		<activity
 			android:name=".MainActivity"
 			android:screenOrientation="portrait"
-			android:theme="@style/AppThemeActionbar"
+			android:theme="@style/AppThemeActionbarLight"
 			android:windowSoftInputMode="adjustResize">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
 		<activity
 			android:name=".LoginActivity"
 			android:screenOrientation="portrait"
-			android:theme="@style/AppTheme"
+			android:theme="@style/AppThemeLight"
 			android:windowSoftInputMode="adjustResize"></activity>
 	</application>
 

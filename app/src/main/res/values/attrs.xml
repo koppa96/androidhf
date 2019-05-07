@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<attr name="cardViewBackground" format="color"/>
+	<attr name="colorBackground" format="color"/>
+	<attr name="colorBackgroundIntense" format="color"/>
+	<attr name="backgroundImage" format="reference"/>
+	<attr name="iconColor" format="color"/>
+	<attr name="logoColor" format="color"/>
+	<attr name="colorPrimaryAlpha" format="color"/>
+	<attr name="colorPrimaryDarkAlpha" format="color"/>
+</resources>

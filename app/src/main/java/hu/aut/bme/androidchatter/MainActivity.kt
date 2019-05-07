@@ -1,8 +1,11 @@
 package hu.aut.bme.androidchatter
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.design.widget.BottomNavigationView
 import android.view.*
 import android.view.animation.Animation
@@ -39,6 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        when (prefs.getString(SettingsFragment.THEME_KEY, SettingsFragment.THEME_DARK)) {
+            SettingsFragment.THEME_DARK -> setTheme(R.style.AppThemeActionbar)
+            SettingsFragment.THEME_LIGHT -> setTheme(R.style.AppThemeActionbarLight)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

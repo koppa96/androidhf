@@ -10,4 +10,14 @@
     <color name="colorDarkBackgroundAlpha">#50000000</color>
     <color name="colorUncheckedMenuItem">#AAAAAA</color>
     <color name="colorCheckedMenuItem">#EEEEEE</color>
+    <color name="iconColor">@android:color/primary_text_dark</color>
+    
+    <color name="colorPrimaryLight">#01579B</color>
+    <color name="colorPrimaryDarkLight">#002F6C</color>
+    <color name="colorAccentLight">#01579B</color>
+    <color name="colorPrimaryAlphaLight">#AA01579B</color>
+    <color name="colorPrimaryDarkAlphaLight">#B5002F6C</color>
+    <color name="colorLightBackgroundAlpha">#50FFFFFF</color>
+    <color name="colorLighterBackgroundAlpha">#80FFFFFF</color>
+    <color name="iconColorLight">@android:color/primary_text_light</color>
 </resources>

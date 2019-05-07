@@ -10,7 +10,7 @@
 		android:id="@+id/tabLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@color/colorPrimaryAlpha"
+		android:background="?attr/colorPrimaryAlpha"
 		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 		app:tabIndicatorColor="@color/colorCheckedMenuItem"
 		app:tabGravity="fill"

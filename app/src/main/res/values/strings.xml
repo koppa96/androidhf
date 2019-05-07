@@ -41,4 +41,9 @@
 	<string name="message">Message</string>
 	<string name="no_chats">You have no chats yet.</string>
 	<string name="no_messages">No messages yet.</string>
+	<string name="enter_your_message">Enter your message…</string>
+	<string name="choose_theme">Choose theme</string>
+	<string name="light">Light</string>
+	<string name="dark">Dark</string>
+	<string name="change_theme">Change theme</string>
 </resources>

@@ -9,6 +9,12 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="backgroundImage">@drawable/login_background_blurry</item>
+        <item name="iconColor">@color/iconColor</item>
+        <item name="logoColor">@color/colorAccent</item>
+        <item name="colorPrimaryAlpha">@color/colorPrimaryAlpha</item>
+        <item name="colorPrimaryDarkAlpha">@color/colorPrimaryDarkAlpha</item>
+        <item name="colorBackgroundIntense">@color/colorDarkerBackgroundAlpha</item>
     </style>
 
     <style name="AppThemeActionbar" parent="Theme.AppCompat.NoActionBar">
@@ -17,11 +23,52 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorPrimaryDarkAlpha</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="cardViewBackground">@color/colorDarkBackgroundAlpha</item>
+        <item name="colorBackground">@color/colorDarkBackgroundAlpha</item>
+        <item name="backgroundImage">@drawable/login_background_blurry</item>
+        <item name="iconColor">@color/iconColor</item>
+        <item name="logoColor">@color/colorAccent</item>
+        <item name="colorPrimaryAlpha">@color/colorPrimaryAlpha</item>
+        <item name="colorPrimaryDarkAlpha">@color/colorPrimaryDarkAlpha</item>
+        <item name="colorBackgroundIntense">@color/colorDarkerBackgroundAlpha</item>
+    </style>
+    
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="colorAccent">@color/colorPrimaryLight</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="backgroundImage">@drawable/background_light_blurry</item>
+        <item name="iconColor">@color/iconColorLight</item>
+        <item name="logoColor">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryAlpha">@color/colorPrimaryAlphaLight</item>
+        <item name="colorPrimaryDarkAlpha">@color/colorPrimaryDarkAlphaLight</item>
+        <item name="colorBackgroundIntense">@color/colorLighterBackgroundAlpha</item>
+        <item name="colorControlNormal">@android:color/primary_text_dark</item>
+    </style>
+    
+    <style name="AppThemeActionbarLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="colorAccent">@color/colorPrimaryLight</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDarkAlphaLight</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="cardViewBackground">@color/colorLightBackgroundAlpha</item>
+        <item name="colorBackground">@color/colorLightBackgroundAlpha</item>
+        <item name="backgroundImage">@drawable/background_light_blurry</item>
+        <item name="iconColor">@color/iconColorLight</item>
+        <item name="logoColor">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryAlpha">@color/colorPrimaryAlphaLight</item>
+        <item name="colorPrimaryDarkAlpha">@color/colorPrimaryDarkAlphaLight</item>
+        <item name="colorBackgroundIntense">@color/colorLighterBackgroundAlpha</item>
+        <item name="colorControlNormal">@android:color/primary_text_dark</item>
     </style>
     
     <style name="CardViewStyle" parent="CardView">
         <item name="cardElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/colorDarkBackgroundAlpha</item>
+        <item name="cardBackgroundColor">?attr/cardViewBackground</item>
         <item name="cardCornerRadius">5dp</item>
         <item name="contentPaddingTop">20dp</item>
         <item name="contentPaddingBottom">20dp</item>
@@ -44,7 +91,8 @@
 
     <style name="CurvedButtonStyle">
         <item name="android:background">@drawable/rounded_button_bg</item>
-        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:backgroundTint">?attr/colorAccent</item>
+        <item name="android:textColor">@android:color/primary_text_dark</item>
         <item name="android:paddingStart">40dp</item>
         <item name="android:paddingEnd">40dp</item>
     </style>

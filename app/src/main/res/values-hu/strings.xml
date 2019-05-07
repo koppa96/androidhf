@@ -42,4 +42,9 @@
 	<string name="message">Üzenet</string>
 	<string name="no_chats">Még nincsenek beszélgetéseid.</string>
     <string name="no_messages">Még nincs üzenet.</string>
+	<string name="enter_your_message">Írd be az üzenetet…</string>
+	<string name="choose_theme">Téma választás</string>
+    <string name="light">Világos</string>
+    <string name="dark">Sötét</string>
+    <string name="change_theme">Témaváltoztatás</string>
 </resources>

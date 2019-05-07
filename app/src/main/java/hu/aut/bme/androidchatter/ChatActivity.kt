@@ -1,8 +1,10 @@
 package hu.aut.bme.androidchatter
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
@@ -17,12 +19,19 @@ import hu.aut.bme.androidchatter.models.Message
 import hu.aut.bme.androidchatter.models.User
 import kotlinx.android.synthetic.main.activity_chat.*
 import hu.aut.bme.androidchatter.databinding.ActivityChatBinding
+import hu.aut.bme.androidchatter.fragments.SettingsFragment
 import hu.aut.bme.androidchatter.viewmodels.ChatViewModel
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var adapter: MessageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        when (prefs.getString(SettingsFragment.THEME_KEY, SettingsFragment.THEME_DARK)) {
+            SettingsFragment.THEME_DARK -> setTheme(R.style.AppThemeActionbar)
+            SettingsFragment.THEME_LIGHT -> setTheme(R.style.AppThemeActionbarLight)
+        }
+
         super.onCreate(savedInstanceState)
 
         val chat = intent.getSerializableExtra("chat") as Chat
