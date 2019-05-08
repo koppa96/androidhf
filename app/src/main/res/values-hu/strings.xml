@@ -47,4 +47,8 @@
     <string name="light">Világos</string>
     <string name="dark">Sötét</string>
     <string name="change_theme">Témaváltoztatás</string>
+    <string name="already_chatting">Már létezik egy beszélgetésed vele: %1$s</string>
+    <string name="too_short_password">A jelszó legalább 6 karakter kell legyen</string>
+    <string name="email_taken">Ehhez az e-mail címhez már létezik fiók</string>
+    <string name="wrong_email_or_password">Hibás felhasználónév vagy jelszó!</string>
 </resources>

@@ -3,24 +3,37 @@ package hu.aut.bme.androidchatter.viewmodels
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.view.View
+import android.widget.Toast
 import com.android.databinding.library.baseAdapters.BR
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
-import hu.aut.bme.androidchatter.interfaces.RegisterView
+import hu.aut.bme.androidchatter.R
+import hu.aut.bme.androidchatter.interfaces.FormView
 import hu.aut.bme.androidchatter.models.User
 import hu.aut.bme.androidchatter.views.LoadingButton
 
-class RegisterViewModel(private val registerView: RegisterView) : BaseObservable() {
+class RegisterViewModel(private val registerView: FormView) : BaseObservable() {
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
+    private val context = registerView.getContext()!!
 
     @Bindable
     var username : String = ""
         set(value) {
             if (field != value) {
                 field = value
+                usernameError = null
                 notifyPropertyChanged(BR.username)
+            }
+        }
+
+    @Bindable
+    var usernameError : String? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyPropertyChanged(BR.usernameError)
             }
         }
 
@@ -29,7 +42,17 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
         set(value) {
             if (field != value) {
                 field = value
+                emailError = null
                 notifyPropertyChanged(BR.email)
+            }
+        }
+
+    @Bindable
+    var emailError : String? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyPropertyChanged(BR.emailError)
             }
         }
 
@@ -38,7 +61,17 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
         set(value) {
             if (field != value) {
                 field = value
+                passwordError = null
                 notifyPropertyChanged(BR.password)
+            }
+        }
+
+    @Bindable
+    var passwordError : String? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyPropertyChanged(BR.passwordError)
             }
         }
 
@@ -47,7 +80,17 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
         set(value) {
             if (field != value) {
                 field = value
+                confirmPasswordError = null
                 notifyPropertyChanged(BR.confirmPassword)
+            }
+        }
+
+    @Bindable
+    var confirmPasswordError : String? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyPropertyChanged(BR.confirmPasswordError)
             }
         }
 
@@ -62,7 +105,7 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
             if (it.isSuccessful) {
                 it.result?.let {
                     if (!it.isEmpty) {
-                        registerView.setUsernameTakenError()
+                        usernameError = context.getString(R.string.username_taken)
                         button?.stopLoadingAnimation()
                         return@addOnCompleteListener
                     }
@@ -71,7 +114,7 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
                 createUser(button)
 
             } else {
-                registerView.showUserCreationError()
+                Toast.makeText(context, R.string.failed_to_create_user, Toast.LENGTH_SHORT).show()
                 button?.stopLoadingAnimation()
             }
         }
@@ -92,14 +135,14 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
 
                     db.collection(User.COLLECTION_NAME).document(uid).set(userData).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            registerView.onSuccessfulRegister()
+                            registerView.onSuccessfulSend()
                         } else {
-                            registerView.showUserCreationError()
+                            Toast.makeText(context, R.string.failed_to_create_user, Toast.LENGTH_SHORT).show()
                             button?.stopLoadingAnimation()
                         }
                     }
                 } else {
-                    registerView.showUserCreationError()
+                    emailError = context.getString(R.string.email_taken)
                     button?.stopLoadingAnimation()
                 }
             }
@@ -107,27 +150,35 @@ class RegisterViewModel(private val registerView: RegisterView) : BaseObservable
 
     fun validateForm() : Boolean {
         if (username.isBlank()) {
-            registerView.setUsernameError()
+            usernameError = context.getString(R.string.field_must_be_filled)
             return false
         }
 
         if (email.isBlank()) {
-            registerView.setEmailError()
+            emailError = context.getString(R.string.field_must_be_filled)
             return false
         }
 
         if (password.isBlank()) {
-            registerView.setPasswordError()
+            passwordError = context.getString(R.string.field_must_be_filled)
+            return false
+        }
+
+        if (password.length < 6) {
+            passwordError = context.getString(R.string.too_short_password)
             return false
         }
 
         if (confirmPassword.isBlank()) {
-            registerView.setConfirmPasswordError()
+            confirmPasswordError = context.getString(R.string.field_must_be_filled)
             return false
         }
 
         if (password != confirmPassword) {
-            registerView.setNotMatchingPasswordsError()
+            password = ""
+            confirmPassword = ""
+            passwordError = context.getString(R.string.passwords_not_matching)
+            confirmPasswordError = context.getString(R.string.passwords_not_matching)
             return false
         }
 

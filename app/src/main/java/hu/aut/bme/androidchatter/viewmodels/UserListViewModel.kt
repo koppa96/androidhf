@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.aut.bme.androidchatter.R
 import hu.aut.bme.androidchatter.adapters.UserAdapter
+import hu.aut.bme.androidchatter.models.Chat
 import hu.aut.bme.androidchatter.models.Request
 import hu.aut.bme.androidchatter.models.User
 
@@ -45,16 +46,32 @@ class UserListViewModel(private val context: Context) : UserAdapter.UserClickLis
                             }
                         }
 
-                        AlertDialog.Builder(context)
-                            .setTitle(context.getString(R.string.confirm_action))
-                            .setMessage(context.getString(R.string.confirm_request_send_text, user.name))
-                            .setCancelable(true)
-                            .setNegativeButton(context.getString(R.string.no), null)
-                            .setPositiveButton(context.getString(R.string.yes)) { dialogInterface: DialogInterface, i: Int ->
-                                sendRequest(user)
+                        db.collection(User.COLLECTION_NAME)
+                            .document(currentUser.uid)
+                            .collection(Chat.COLLECTION_NAME)
+                            .get()
+                            .addOnSuccessListener {
+                                it.documents.forEach {
+                                    val chat = it.toObject(Chat::class.java)!!
+                                    if (chat.user1Id == user.uid || chat.user2Id == user.uid) {
+                                        Toast.makeText(context, "You are already chatting with ${user.name}", Toast.LENGTH_SHORT).show()
+                                        return@addOnSuccessListener
+                                    }
+                                }
+
+                                AlertDialog.Builder(context)
+                                    .setTitle(context.getString(R.string.confirm_action))
+                                    .setMessage(context.getString(R.string.confirm_request_send_text, user.name))
+                                    .setCancelable(true)
+                                    .setNegativeButton(context.getString(R.string.no), null)
+                                    .setPositiveButton(context.getString(R.string.yes)) { dialogInterface: DialogInterface, i: Int ->
+                                        sendRequest(user)
+                                    }
+                                    .create()
+                                    .show()
                             }
-                            .create()
-                            .show()
+
+
                     }
 
             }

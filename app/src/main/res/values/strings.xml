@@ -46,4 +46,8 @@
 	<string name="light">Light</string>
 	<string name="dark">Dark</string>
 	<string name="change_theme">Change theme</string>
+	<string name="already_chatting">You are already chatting with %1$s</string>
+	<string name="too_short_password">The password needs to be at leas 6 characters long</string>
+	<string name="email_taken">The e-mail address is already registered</string>
+	<string name="wrong_email_or_password">Wrong e-mail or password!</string>
 </resources>
