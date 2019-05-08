@@ -7,19 +7,19 @@
 	
 	<application
 		android:allowBackup="true"
-		android:icon="@mipmap/ic_launcher"
+		android:icon="@drawable/ic_message_black_24dp"
 		android:label="@string/app_name"
-		android:roundIcon="@mipmap/ic_launcher_round"
+		android:roundIcon="@drawable/ic_message_black_24dp"
 		android:supportsRtl="true">
 		<activity
 			android:name=".ChatActivity"
-			android:theme="@style/AppThemeActionbarLight"
+			android:theme="@style/AppThemeActionbar"
 			android:screenOrientation="portrait"
 			android:windowSoftInputMode="adjustResize"></activity>
 		<activity
 			android:name=".MainActivity"
 			android:screenOrientation="portrait"
-			android:theme="@style/AppThemeActionbarLight"
+			android:theme="@style/AppThemeActionbar"
 			android:windowSoftInputMode="adjustResize">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
 		<activity
 			android:name=".LoginActivity"
 			android:screenOrientation="portrait"
-			android:theme="@style/AppThemeLight"
+			android:theme="@style/AppTheme"
 			android:windowSoftInputMode="adjustResize"></activity>
 	</application>
 
